@@ -188,7 +188,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 32px);
-  max-width: 720px; /* Starts compact in the middle */
+  max-width: 920px; /* Starts compact in the middle with ample space for logo and links */
   height: 64px;
   z-index: var(--z-sticky);
   display: flex;
@@ -382,7 +382,7 @@ h1, h2, h3, h4, h5, h6 {
 .mobile-menu.open .mobile-nav-link:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.20s; }
 .mobile-menu.open .mobile-nav-link:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.25s; }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .navbar {
     top: 0;
     width: 100%;

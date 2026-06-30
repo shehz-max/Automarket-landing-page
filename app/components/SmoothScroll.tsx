@@ -7,6 +7,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
+    // Register ScrollTrigger to prevent runtime crashes when ScrollTrigger.update is referenced
+    gsap.registerPlugin(ScrollTrigger);
+
     const lenis = new Lenis({
       lerp: 0.08,        // Heavy, luxurious feel — DO NOT CHANGE
       duration: 1.8,     // Long duration for weight — DO NOT CHANGE
