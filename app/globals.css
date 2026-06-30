@@ -460,7 +460,24 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-h1 .word {
   display: inline-block;
-  margin-right: 0.25em;
+  margin-right: 0.22em;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.hero-h1 .word-inner {
+  display: inline-block;
+  transform: translateY(100%);
+  animation: slideUpReveal 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUpReveal {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .hero-h1 .accent {
@@ -611,7 +628,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-border-rest);
 }
 
-/* PARALLAX CAR SHOWCASE & GLARE SWEEP */
+/* CAR SHOWCASE CONFIGURATOR & GLARE SWEEP */
 .hero-car-wrapper {
   position: relative;
   width: 100%;
@@ -626,18 +643,30 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   filter: drop-shadow(0 25px 60px rgba(0, 0, 0, 0.95));
 }
 
-.hero-car-image-container img {
+.hero-car-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.hero-car-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hero-car-slide img {
   width: 100% !important;
   height: 100% !important;
   object-fit: contain;
   will-change: transform;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hero-car-ambient-glow {
@@ -695,6 +724,7 @@ h1, h2, h3, h4, h5, h6 {
   gap: 8px;
   min-width: 200px;
   transition: border-color 0.3s ease;
+  z-index: 10;
 }
 
 .hero-car-telemetry:hover {
@@ -712,31 +742,6 @@ h1, h2, h3, h4, h5, h6 {
 .hero-car-telemetry-row span {
   color: var(--color-text-primary);
   font-weight: 700;
-}
-
-/* SCROLL DOWN INDICATOR */
-.scroll-indicator {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-body);
-  font-size: var(--font-size-label);
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: var(--letter-spacing-wider);
-  animation: scrollBounce 2s ease-in-out infinite;
-  z-index: 10;
-}
-
-.scroll-arrow {
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, var(--color-text-muted), transparent);
 }
 
 @media (max-width: 768px) {
