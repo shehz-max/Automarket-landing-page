@@ -375,11 +375,9 @@ h1, h2, h3, h4, h5, h6 {
 .hero {
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  padding: 0 24px;
+  padding: 80px 24px;
   position: relative;
   overflow: hidden;
   background: var(--color-bg-primary);
@@ -389,22 +387,42 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 30%, rgba(255, 77, 0, 0.09) 0%, transparent 45%),
-    radial-gradient(circle at 80% 70%, rgba(255, 140, 0, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 30% 30%, rgba(var(--color-active-rgb, 255, 77, 0), 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(var(--color-active-rgb, 255, 77, 0), 0.04) 0%, transparent 45%),
     radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.95) 0%, var(--color-bg-primary) 100%);
   background-size: 200% 200%;
   animation: meshShift 20s ease infinite;
   z-index: 0;
 }
 
-.hero-content {
-  position: relative;
+/* UPGRADED SPLIT GRID CONTAINER */
+.hero-grid-split {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 64px;
+  width: 100%;
+  max-width: var(--container-max);
+  align-items: center;
   z-index: 1;
-  max-width: 900px;
+  position: relative;
+  text-align: left;
+}
+
+.hero-left-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.hero-right-col {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 28px;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 480px;
 }
 
 .hero-badge {
@@ -446,27 +464,71 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-h1 .accent {
-  background: var(--gradient-accent);
+  background: var(--gradient-active-accent, var(--gradient-accent));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+  transition: background 0.5s ease;
 }
 
 .hero-sub {
   font-family: var(--font-body);
-  font-size: 20px;
+  font-size: 18px;
   color: var(--color-text-body);
   line-height: var(--line-height-normal);
-  max-width: 580px;
+  max-width: 540px;
   margin: 0;
+}
+
+/* CONFIGURATOR CATEGORY TABS */
+.hero-tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid var(--color-border-rest);
+  padding-bottom: 8px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.hero-tab-btn {
+  background: transparent;
+  border: none;
+  padding: 8px 16px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-none);
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.hero-tab-btn:hover {
+  color: var(--color-text-primary);
+}
+
+.hero-tab-btn.active {
+  color: var(--color-text-primary);
+}
+
+.hero-tab-btn.active::after {
+  content: "";
+  position: absolute;
+  bottom: -9px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-active-accent, var(--color-accent));
+  transition: background 0.5s ease;
 }
 
 /* Glassmorphism search panel */
 .search-bar {
   display: flex;
   width: 100%;
-  max-width: 800px;
+  max-width: 720px;
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(24px);
   border: 1px solid var(--color-border-rest);
@@ -477,8 +539,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .search-bar:focus-within {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 30px rgba(255, 77, 0, 0.15);
+  border-color: var(--color-active-accent, var(--color-accent));
+  box-shadow: 0 0 30px var(--glow-active-accent, rgba(255, 77, 0, 0.15));
 }
 
 .search-field {
@@ -510,7 +572,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .search-btn {
-  background: var(--color-accent);
+  background: var(--color-active-accent, var(--color-accent));
   color: var(--color-text-primary);
   border: none;
   padding: 16px 36px;
@@ -519,27 +581,24 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
   border-radius: var(--radius-none);
-  transition: all var(--duration-normal) var(--ease-out);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
   flex-shrink: 0;
   letter-spacing: var(--letter-spacing-wide);
 }
 
 .search-btn:hover {
-  background: var(--color-accent-hover);
-  box-shadow: var(--glow-accent);
-  transform: translateY(0);
+  background: var(--color-active-accent-hover, var(--color-accent-hover));
+  box-shadow: 0 0 20px var(--glow-active-accent, rgba(255, 77, 0, 0.3));
 }
 
 .hero-trust {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 16px;
-  margin-top: 24px;
+  margin-top: 8px;
   font-family: var(--font-body);
   font-size: var(--font-size-small);
   color: var(--color-text-muted);
-  letter-spacing: var(--letter-spacing-normal);
 }
 
 .hero-trust .stars {
@@ -552,6 +611,107 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-border-rest);
 }
 
+/* PARALLAX CAR SHOWCASE & GLARE SWEEP */
+.hero-car-wrapper {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-car-image-container {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 25px 60px rgba(0, 0, 0, 0.95));
+}
+
+.hero-car-image-container img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  will-change: transform;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-car-ambient-glow {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  background: var(--color-active-accent, var(--color-accent));
+  opacity: 0.12;
+  filter: blur(120px);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  transition: background 0.5s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Sweeping Glare light glare effect */
+.glare-sweep {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.12) 45%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.12) 55%, transparent 60%);
+  background-size: 250% 250%;
+  pointer-events: none;
+  z-index: 2;
+  transform: skewX(-20deg);
+}
+
+.glare-sweep.run-sweep {
+  animation: glareSweep 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+@keyframes glareSweep {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+/* Floating Technical Telemetry Box */
+.hero-car-telemetry {
+  position: absolute;
+  bottom: 0px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border-rest);
+  padding: 20px;
+  font-family: var(--font-mono);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 200px;
+  transition: border-color 0.3s ease;
+}
+
+.hero-car-telemetry:hover {
+  border-color: var(--color-active-accent, var(--color-accent));
+}
+
+.hero-car-telemetry-row {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.hero-car-telemetry-row span {
+  color: var(--color-text-primary);
+  font-weight: 700;
+}
+
+/* SCROLL DOWN INDICATOR */
 .scroll-indicator {
   position: absolute;
   bottom: 40px;
@@ -567,6 +727,7 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-wider);
   animation: scrollBounce 2s ease-in-out infinite;
+  z-index: 10;
 }
 
 .scroll-arrow {

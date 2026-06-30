@@ -40,6 +40,13 @@ export default function HeroAnimation({ children }: { children: React.ReactNode 
         duration: 0.6,
       }, 1.2);
 
+      // Category tabs
+      tl.from(".hero-tabs", {
+        y: 15,
+        opacity: 0,
+        duration: 0.5,
+      }, 1.4);
+
       // Search bar
       tl.from(".search-bar", {
         scale: 0.95,
@@ -47,6 +54,20 @@ export default function HeroAnimation({ children }: { children: React.ReactNode 
         duration: 0.5,
         ease: "back.out(1.4)",
       }, 1.5);
+
+      // Car image container (slides in from right)
+      tl.from(".hero-car-image-container", {
+        x: 60,
+        opacity: 0,
+        duration: 1.0,
+      }, 1.0);
+
+      // Telemetry stats box
+      tl.from(".hero-car-telemetry", {
+        y: 20,
+        opacity: 0,
+        duration: 0.6,
+      }, 1.6);
 
       // Trust row
       tl.from(".hero-trust", {
