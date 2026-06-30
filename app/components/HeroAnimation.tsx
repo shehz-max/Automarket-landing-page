@@ -7,8 +7,10 @@ export default function HeroAnimation({ children }: { children: React.ReactNode 
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    const el = containerRef.current;
+    if (!el) return;
 
+    // Correctly pass the DOM element (el) instead of the Ref Object
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
@@ -81,7 +83,7 @@ export default function HeroAnimation({ children }: { children: React.ReactNode 
         opacity: 0,
         duration: 0.4,
       }, 2.2);
-    }, containerRef);
+    }, el);
 
     return () => ctx.revert();
   }, []);

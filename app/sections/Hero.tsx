@@ -225,12 +225,7 @@ export default function Hero() {
                 }}
               ></div>
 
-              <div 
-                className="hero-car-image-container"
-                style={{
-                  transform: `translate(${mousePos.x}px, ${mousePos.y}px)`,
-                }}
-              >
+              <div className="hero-car-image-container">
                 {/* Remounts glare sweep to run CSS animation on tab shift */}
                 <div key={activeCategory} className="glare-sweep run-sweep"></div>
                 <Image
@@ -240,6 +235,10 @@ export default function Hero() {
                   height={375}
                   priority
                   quality={90}
+                  style={{
+                    transform: `translate(${mousePos.x}px, ${mousePos.y}px)`,
+                    transition: "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+                  }}
                 />
               </div>
 
