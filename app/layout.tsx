@@ -201,22 +201,25 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en-GB" className={`${montserrat.variable} ${inter.variable} ${spaceMono.variable}`}>
+    <html lang="en-GB" className={`${montserrat.variable} ${inter.variable} ${spaceMono.variable}`} suppressHydrationWarning>
       <head>
         <script
+          key="schema-local-business"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
         <script
+          key="schema-faq"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }}
         />
         <script
+          key="schema-software"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationSchema) }}
         />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <SmoothScroll>
           {children}
         </SmoothScroll>
